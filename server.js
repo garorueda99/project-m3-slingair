@@ -3,7 +3,11 @@
 // const bodyParser = require('body-parser')// not requiered any longer;
 const express = require('express');
 const morgan = require('morgan');
-const { handleFlight, handleFlightNumbers } = require('./handlers');
+const {
+  handleFlight,
+  handleFlightNumbers,
+  handleSubmit,
+} = require('./handlers');
 
 const PORT = process.env.PORT || 8000;
 
@@ -24,5 +28,6 @@ express()
   // endpoints
   .get('/flights', handleFlightNumbers)
   .get('/flights/:flightNumber', handleFlight)
+  .post('/users', handleSubmit)
   .use((req, res) => res.send('Not Found'))
   .listen(PORT, () => console.log(`Listening on port ${PORT}`));

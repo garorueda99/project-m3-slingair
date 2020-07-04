@@ -1,6 +1,7 @@
 const flightInput = document.getElementById('flight');
 const seatsDiv = document.getElementById('seats-section');
 const confirmButton = document.getElementById('confirm-button');
+const form = document.querySelector('#seats');
 
 let selection = '';
 
@@ -8,6 +9,7 @@ const renderSeats = (data) => {
   //clean the canvas
   const seatsContainer = document.querySelector('#seats-section');
   seatsContainer.innerHTML = '';
+  //Start populating
   document.querySelector('.form-container').style.display = 'block';
   const alpha = ['A', 'B', 'C', 'D', 'E', 'F'];
   for (let r = 1; r < 11; r++) {
@@ -56,26 +58,40 @@ const toggleFormContent = (event) => {
     .then((data) => {
       renderSeats(data);
     });
-  // TODO: contact the server to get the seating availability
-  //      - only contact the server if the flight number is this format 'SA###'.
-  //      - Do I need to create an error message if the number is not valid?
-
-  // TODO: Pass the response data to renderSeats to create the appropriate seat-type.
 };
 
 const handleConfirmSeat = (event) => {
   event.preventDefault();
-  // TODO: everything in here!
-  fetch('/users', {
-    method: 'POST',
-    body: JSON.stringify({
-      givenName: document.getElementById('givenName').value,
-    }),
-    headers: {
-      Accept: 'application/json',
-      'Content-Type': 'application/json',
-    },
-  });
+  const list = document.getElementById('flight');
+  const flightNumber = list.options[list.selectedIndex].text;
+
+  try {
+    const seat = document.querySelector('.selected').innerText;
+    fetch('/users', {
+      method: 'POST',
+      redirect: 'follow',
+      body: JSON.stringify({
+        id: null,
+        flight: flightNumber,
+        seat: seat,
+        givenName: document.getElementById('givenName').value,
+        surname: document.getElementById('surname').value,
+        email: document.getElementById('email').value,
+      }),
+      headers: {
+        Accept: 'application/json',
+        'Content-Type': 'application/json',
+      },
+    }).then((res) => {
+      console.log(res.redirected, res.url);
+      res.json().then((key) => console.log(key));
+    });
+    // .catch((err) => console.log(err));
+  } catch (err) {
+    window.alert('Please, select a seat');
+    console.log(err);
+    return;
+  }
 };
 
 function loadFlights() {
@@ -93,3 +109,4 @@ function loadFlights() {
 
 loadFlights();
 flightInput.addEventListener('change', toggleFormContent);
+form.addEventListener('onsubmit', handleConfirmSeat);

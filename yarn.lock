@@ -797,6 +797,11 @@ qs@6.7.0:
   resolved "https://registry.yarnpkg.com/qs/-/qs-6.7.0.tgz#41dc1a015e3d581f1621776be31afb2876a9b1bc"
   integrity sha512-VCdBRNFTX1fyE7Nb6FYoURo/SPe62QCaAyzJvUjwRaIsc+NePBEniHlvxFmmX56+HZphIGtV0XeCirBtpDrTyQ==
 
+random-key-generator@^1.2.3:
+  version "1.2.3"
+  resolved "https://registry.yarnpkg.com/random-key-generator/-/random-key-generator-1.2.3.tgz#00c370d1f2f5f334a15f8e13f0b19c80874d227b"
+  integrity sha512-l+YVnXO+gSgno/J1VfiapQRRzMG4ChH//9zKLcQRa1LD7ApEGOevR4N/k4RTljjx0/W0OMC0TN0dHETFuFvPYg==
+
 range-parser@~1.2.1:
   version "1.2.1"
   resolved "https://registry.yarnpkg.com/range-parser/-/range-parser-1.2.1.tgz#3cf37023d199e1c24d1a55b84800c2f3e6468031"
