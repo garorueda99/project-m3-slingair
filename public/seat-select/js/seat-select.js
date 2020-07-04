@@ -4,7 +4,8 @@ const confirmButton = document.getElementById('confirm-button');
 
 let selection = '';
 
-const renderSeats = () => {
+const renderSeats = (data) => {
+  // console.log('Hello', data);
   document.querySelector('.form-container').style.display = 'block';
 
   const alpha = ['A', 'B', 'C', 'D', 'E', 'F'];
@@ -23,6 +24,9 @@ const renderSeats = () => {
 
       // TODO: render the seat availability based on the data...
       seat.innerHTML = seatAvailable;
+      data.find((seat) => seat.id === seatNumber).isAvailable
+        ? (seat.innerHTML = seatAvailable)
+        : (seat.innerHTML = seatOccupied);
       row.appendChild(seat);
     }
   }
@@ -49,14 +53,13 @@ const toggleFormContent = (event) => {
   fetch(`/flights/${flightNumber}`)
     .then((res) => res.json())
     .then((data) => {
-      console.log(data);
+      renderSeats(data);
     });
   // TODO: contact the server to get the seating availability
   //      - only contact the server if the flight number is this format 'SA###'.
   //      - Do I need to create an error message if the number is not valid?
 
   // TODO: Pass the response data to renderSeats to create the appropriate seat-type.
-  renderSeats();
 };
 
 const handleConfirmSeat = (event) => {
@@ -74,4 +77,18 @@ const handleConfirmSeat = (event) => {
   });
 };
 
-flightInput.addEventListener('blur', toggleFormContent);
+function loadFlights() {
+  fetch('/flights')
+    .then((data) => data.json())
+    .then((flights) => {
+      flights.forEach((flight) => {
+        const line = document.createElement('option');
+        line.value = flight;
+        line.innerText = flight;
+        flightInput.appendChild(line);
+      });
+    });
+}
+
+loadFlights();
+flightInput.addEventListener('change', toggleFormContent);
