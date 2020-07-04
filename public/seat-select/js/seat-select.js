@@ -5,9 +5,10 @@ const confirmButton = document.getElementById('confirm-button');
 let selection = '';
 
 const renderSeats = (data) => {
-  // console.log('Hello', data);
+  //clean the canvas
+  const seatsContainer = document.querySelector('#seats-section');
+  seatsContainer.innerHTML = '';
   document.querySelector('.form-container').style.display = 'block';
-
   const alpha = ['A', 'B', 'C', 'D', 'E', 'F'];
   for (let r = 1; r < 11; r++) {
     const row = document.createElement('ol');
