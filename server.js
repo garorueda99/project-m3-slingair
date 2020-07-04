@@ -7,6 +7,7 @@ const {
   handleFlight,
   handleFlightNumbers,
   handleSubmit,
+  handleConfirmation,
 } = require('./handlers');
 
 const PORT = process.env.PORT || 8000;
@@ -24,10 +25,11 @@ express()
   .use(express.static('public'))
   .use(express.json())
   .use(express.urlencoded({ extended: false }))
-
+  .set('view engine', 'ejs')
   // endpoints
   .get('/flights', handleFlightNumbers)
   .get('/flights/:flightNumber', handleFlight)
   .post('/users', handleSubmit)
+  .get('/confirmed/:id', handleConfirmation)
   .use((req, res) => res.send('Not Found'))
   .listen(PORT, () => console.log(`Listening on port ${PORT}`));

@@ -52,7 +52,7 @@ const renderSeats = (data) => {
 
 const toggleFormContent = (event) => {
   const flightNumber = flightInput.value;
-  console.log('toggleFormContent: ', flightNumber);
+  // console.log('toggleFormContent: ', flightNumber);
   fetch(`/flights/${flightNumber}`)
     .then((res) => res.json())
     .then((data) => {
@@ -82,14 +82,18 @@ const handleConfirmSeat = (event) => {
         Accept: 'application/json',
         'Content-Type': 'application/json',
       },
-    }).then((res) => {
-      console.log(res.redirected, res.url);
-      res.json().then((key) => console.log(key));
-    });
-    // .catch((err) => console.log(err));
+    })
+      .then((res) => {
+        console.log("I'm here");
+        if (res.redirected) {
+          console.log('checkpoint');
+          window.location.href = res.url;
+        }
+      })
+      .catch((err) => console.log(err));
   } catch (err) {
     window.alert('Please, select a seat');
-    console.log(err);
+    console.log('check this ', err);
     return;
   }
 };

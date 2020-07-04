@@ -14,7 +14,7 @@ const handleFlight = (req, res) => {
   const { flightNumber } = req.params;
   // get all flight numbers
   const allFlights = Object.keys(flights);
-  // is flightNumber in the array?
+  // seats availability
   res
     .status(200)
     .send(
@@ -35,4 +35,15 @@ const handleSubmit = (req, res) => {
   res.status(301).redirect(`/confirmed/${key}`);
 };
 
-module.exports = { handleFlight, handleFlightNumbers, handleSubmit };
+const handleConfirmation = (req, res) => {
+  const { id } = req.params;
+  const info = reservations.find((reg) => reg.id === id);
+  res.status(301).render('pages/confirmed', { info });
+};
+
+module.exports = {
+  handleFlight,
+  handleFlightNumbers,
+  handleSubmit,
+  handleConfirmation,
+};
