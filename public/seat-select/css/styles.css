@@ -277,3 +277,7 @@ input {
 .or {
   margin: 12px 0 18px 0;
 }
+
+.dataform {
+  width: 300px;
+}

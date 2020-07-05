@@ -8,6 +8,7 @@ const {
   handleFlightNumbers,
   handleSubmit,
   handleConfirmation,
+  handleTicketCopyOfConfirmation,
 } = require('./handlers');
 
 const PORT = process.env.PORT || 8000;
@@ -31,5 +32,6 @@ express()
   .get('/flights/:flightNumber', handleFlight)
   .post('/users', handleSubmit)
   .get('/confirmed/:id', handleConfirmation)
+  .get('/ticketInfo', handleTicketCopyOfConfirmation)
   .use((req, res) => res.send('Not Found'))
   .listen(PORT, () => console.log(`Listening on port ${PORT}`));

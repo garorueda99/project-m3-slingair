@@ -14,25 +14,27 @@
             <h1 class='header-logo'>Air Slingshot</h1>
     </div>
     <div class="check">
-        <div class="form-content user">
-            <div class='form-item'>
-                <label for="givenName">First Name</label>
-                <input id="givenName" type="text" name="givenName" placeholder="Your first name" required />
-            </div>
-            <div class='form-item'>
-                <label for="surname">Last Name</label>
-                <input id="surname" type="text" name="surname" placeholder="Your last name" required />
-            </div>
+        <div class="form-content user data-form">
+            <form onsubmit="handleCheckSeat(event)">
+                <div class='form-item'>
+                    <label for=" givenName">First Name</label>
+                    <input id="givenName" type="text" name="givenName" placeholder="Your first name" />
+                </div>
+                <div class='form-item'>
+                    <label for="surname">Last Name</label>
+                    <input id="surname" type="text" name="surname" placeholder="Your last name" />
+                </div>
 
-            <p class="or">OR</p>
-            <div class='form-item'>
-                <label for="email">Email</label>
-                <input id="email" type="email" name="email" placeholder="Your email" required />
-            </div>
-            <button class='button confirm' id='confirm-button'>
-                <div class="lds-dual-ring"></div>
-                Check<span id="seat-number"></span>
-            </button>
+                <p class="or">OR</p>
+                <div class='form-item'>
+                    <label for="email">Email</label>
+                    <input id="email" type="email" name="email" placeholder="Your email" />
+                </div>
+                <button class='button confirm' id='confirm-button'>
+                    <div class="lds-dual-ring"></div>
+                    Check<span id="seat-number"></span>
+                </button>
+            </form>
         </div>
         <div class="content confirmation">
             <div class="user">
@@ -41,7 +43,7 @@
                     <li>Flight #:<span id="flight"></span> seat #: <span id="seat"></span>
                     </li>
                     <li>Name:<span id="name"></span></li>
-                    <li>Email:<span id="email"></span></li>
+                    <li>Email:<span id="email-2"></span></li>
                 </ul>
             </div>
         </div>

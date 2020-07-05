@@ -41,9 +41,15 @@ const handleConfirmation = (req, res) => {
   res.status(301).render('pages/confirmed', { info });
 };
 
+const handleTicketCopyOfConfirmation = (req, res) => {
+  const answer = reservations.find((reg) => reg.email === req.query.email);
+  answer != undefined ? res.status(200).send(answer) : res.status(400).end();
+};
+
 module.exports = {
   handleFlight,
   handleFlightNumbers,
   handleSubmit,
   handleConfirmation,
+  handleTicketCopyOfConfirmation,
 };
