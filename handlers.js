@@ -32,6 +32,11 @@ const handleSubmit = (req, res) => {
   const register = req.body;
   register.id = key;
   reservations.push(register);
+  flights[register.flight].find(
+    (reg) => reg.id === register.seat
+  ).isAvailable = false;
+  console.log(flights[register.flight].find((reg) => reg.id === register.seat));
+  //flights[register.flight][register.seat].isAvailable = false;
   res.status(301).redirect(`/confirmed/${key}`);
 };
 
