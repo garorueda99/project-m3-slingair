@@ -35,6 +35,13 @@ function getDataWithEmail() {
     .catch((err) => alert('Please, check your info'));
 }
 
+function getDataWithFullName() {
+  fetch(`/ticketinfo?surname=${surname.value}&givenName=${givenName.value}`)
+    .then((data) => data.json())
+    .then((ticket) => updatePageWithTicket(ticket))
+    .catch((err) => alert('Please, check your info'));
+}
+
 function updatePageWithTicket(ticket) {
   const flight = document.querySelector('#flight');
   const seat = document.querySelector('#seat');

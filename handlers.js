@@ -35,8 +35,6 @@ const handleSubmit = (req, res) => {
   flights[register.flight].find(
     (reg) => reg.id === register.seat
   ).isAvailable = false;
-  console.log(flights[register.flight].find((reg) => reg.id === register.seat));
-  //flights[register.flight][register.seat].isAvailable = false;
   res.status(301).redirect(`/confirmed/${key}`);
 };
 
@@ -47,8 +45,17 @@ const handleConfirmation = (req, res) => {
 };
 
 const handleTicketCopyOfConfirmation = (req, res) => {
-  const answer = reservations.find((reg) => reg.email === req.query.email);
-  answer != undefined ? res.status(200).send(answer) : res.status(400).end();
+  let answer = reservations.find((reg) => reg.email === req.query.email);
+  answer != undefined
+    ? res.status(200).send(answer).end()
+    : (answer = reservations.find(
+        (reg) =>
+          reg.surname === req.query.surname &&
+          reg.givenName === req.query.givenName
+      ));
+  answer != undefined
+    ? res.status(200).send(answer).end()
+    : res.status(400).end();
 };
 
 module.exports = {
