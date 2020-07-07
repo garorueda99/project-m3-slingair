@@ -20,7 +20,7 @@ const handleFlight = (req, res) => {
     .send(
       allFlights.includes(flightNumber)
         ? (seatArray = flights[flightNumber])
-        : 'sorry flight not found'
+        : 'sorry, flight not found'
     );
 };
 
@@ -45,15 +45,15 @@ const handleConfirmation = (req, res) => {
 };
 
 const handleTicketCopyOfConfirmation = (req, res) => {
-  let answer = reservations.find((reg) => reg.email === req.query.email);
-  answer != undefined
+  let answer = reservations.filter((reg) => reg.email === req.query.email);
+  answer.length != 0
     ? res.status(200).send(answer).end()
-    : (answer = reservations.find(
+    : (answer = reservations.filter(
         (reg) =>
           reg.surname === req.query.surname &&
           reg.givenName === req.query.givenName
       ));
-  answer != undefined
+  answer.length != 0
     ? res.status(200).send(answer).end()
     : res.status(400).end();
 };

@@ -14,7 +14,7 @@
             <h1 class='header-logo'>Air Slingshot</h1>
     </div>
     <div class="check">
-        <div class="form-content user data-form">
+        <div class="form-content user">
             <form onsubmit="handleCheckSeat(event)">
                 <div class='form-item'>
                     <label for=" givenName">First Name</label>
@@ -37,14 +37,8 @@
             </form>
         </div>
         <div class="content confirmation">
-            <div class="user">
-                <p class="message">Your flight is confirmed!</p>
-                <ul class="user-info">
-                    <li>Flight #:<span id="flight"></span> seat #: <span id="seat"></span>
-                    </li>
-                    <li>Name:<span id="name"></span></li>
-                    <li>Email:<span id="email-2"></span></li>
-                </ul>
+            <div class="content-form user" id="screenConfirmation">
+                <p class="message" id="message">Fill the blanks!</p>
             </div>
         </div>
     </div>

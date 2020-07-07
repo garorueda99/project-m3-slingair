@@ -84,7 +84,6 @@ const handleConfirmSeat = (event) => {
       },
     })
       .then((res) => {
-        console.log("I'm here");
         if (res.redirected) {
           console.log('checkpoint');
           window.location.href = res.url;

@@ -1,8 +1,11 @@
 const givenName = document.querySelector('#givenName');
 const surname = document.querySelector('#surname');
 const email = document.querySelector('#email');
+const screenConfirmation = document.querySelector('#screenConfirmation');
 
 const handleCheckSeat = (event) => {
+  screenConfirmation.innerHTML =
+    '<p class="message" id="message">Fill the blanks!</p>';
   event.preventDefault();
   const route = validateFields();
   switch (route) {
@@ -31,24 +34,32 @@ function validateFields() {
 function getDataWithEmail() {
   fetch(`/ticketinfo?email=${email.value}`)
     .then((data) => data.json())
-    .then((ticket) => updatePageWithTicket(ticket))
-    .catch((err) => alert('Please, check your info'));
+    .then((tickets) => updatePageWithTicket(tickets))
+    .catch((err) =>
+      alert(' Please, check your info, it seems there is someting wrong')
+    );
 }
 
 function getDataWithFullName() {
   fetch(`/ticketinfo?surname=${surname.value}&givenName=${givenName.value}`)
     .then((data) => data.json())
-    .then((ticket) => updatePageWithTicket(ticket))
-    .catch((err) => alert('Please, check your info'));
+    .then((tickets) => updatePageWithTicket(tickets))
+    .catch((err) =>
+      alert(' Please, check your info, it seems there is someting wrong')
+    );
 }
 
-function updatePageWithTicket(ticket) {
-  const flight = document.querySelector('#flight');
-  const seat = document.querySelector('#seat');
-  const name = document.querySelector('#name');
-  const email = document.querySelector('#email-2');
-  flight.innerText = ticket.flight;
-  seat.innerText = ticket.seat;
-  name.innerText = ` ${ticket.givenName} ${ticket.surname}`;
-  email.innerText = ticket.email;
+function updatePageWithTicket(tickets) {
+  const message = document.querySelector('#message');
+  message.innerText = 'Found Ticket(s)';
+  tickets.forEach((reg) => {
+    const print = `
+  <ul class="user-info register">
+      <li>Flight #:<span>${reg.flight}</span> seat #: <span>${reg.seat}</span></li>
+      <li>Name:<span>${reg.givenName} ${reg.surname}</span></li>
+      <li>Email:<span>${reg.email}</span></li>
+  </ul>
+  <br>`;
+    screenConfirmation.innerHTML = screenConfirmation.innerHTML + print;
+  });
 }

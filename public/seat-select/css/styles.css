@@ -210,7 +210,7 @@ input {
   border-radius: 5px;
   margin: auto 12px auto 18px;
   padding: 30px;
-  width: 400px;
+  min-width: 400px;
 }
 
 .form-item {
@@ -278,6 +278,6 @@ input {
   margin: 12px 0 18px 0;
 }
 
-.dataform {
-  width: 300px;
+.register {
+  margin-bottom: 8px;
 }
